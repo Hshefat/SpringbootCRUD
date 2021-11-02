@@ -16,6 +16,8 @@ public class EmpService {
 
 	@Autowired
 	private EmpRepo repo;
+	
+	
 	public void addEmp (Employee e) {
 
 		repo.save(e);

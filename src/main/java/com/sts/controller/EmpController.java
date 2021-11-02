@@ -39,6 +39,7 @@ public class EmpController {
 	
 	
 	
+	
 	@GetMapping("/")
 	public String home(Model m) {
 

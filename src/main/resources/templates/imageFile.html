@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -11,21 +11,12 @@
 	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 <link rel="shortcut icon" href="img/favicon.png">
 
+<title>Test Admin</title>
 
+<!-- Bootstrap JS -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-	crossorigin="anonymous">
-<!-- Font Awesome JS -->
-<script src="https://kit.fontawesome.com/0000000000.js"
-	crossorigin="anonymous"></script>
-
-
-
-
-<title>Creative - Bootstrap Admin Template</title>
 
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -75,7 +66,7 @@
 			</div>
 
 			<!--logo start-->
-			<a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
+			<a href="index.html" class="logo">New <span class="lite">Admin</span></a>
 			<!--logo end-->
 
 			<div class="nav search-row" id="top_menu">
@@ -273,20 +264,19 @@
 			<div id="sidebar" class="nav-collapse ">
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu">
+
 					<li class="active"><a class="" th:href="@{/}"> <i
 							class="icon_house_alt"></i> <span>Dashboard</span>
 					</a></li>
-					<li class="sub-menu">
-					<a href="javascript:;" class=""> <i
+
+					<li class="sub-menu"><a href="javascript:;" class=""> <i
 							class="icon_document_alt"></i> <span>Forms</span> <span
 							class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">
 							<li><a class="" th:href="@{/addemp}">Add Employee</a></li>
-							<li><a class="" th:href="@{/image}">Image&File</a></li>
-							<li><a class="" th:href="@{/upload}">Upload</a></li>
-						</ul>
-					</li>
+							<li><a class="" th:href="@{/image}">Image</a></li>
+						</ul></li>
 					<li class="sub-menu"><a href="javascript:;" class=""> <i
 							class="icon_desktop"></i> <span>UI Fitures</span> <span
 							class="menu-arrow arrow_carrot-right"></span>
@@ -359,60 +349,39 @@
 
 
 
-
-				<div class="container ">
-					<div th:if="${session.msg}">
-						<div class="alert alert-success" role="alert"
-							th:text="${session.msg}"></div>
-						<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+				<form th:action="@{/saveimage}" 
+				th:object="${imageFile}"
+					method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="">Choose file </label> <input type="file"
+							class="form-control" id="fileImage" name="image"
+							placeholder="Input field">
 					</div>
-				</div>
+					<div id="preview">
+						<img src="" id="previewImage" width="200" height="200">
+					</div>
+
+					<div class="form-group">
+						<label>Description: </label> <input type="text"
+							class="form-control" name="description">
+					</div>
 
 
 
-				<div class="container p-5">
-				<a class="btn btn-primary" th:href="@{/addemp}">Add Employee</a>
-					<table class="table table-striped">
-						<thead class="bg-light text-red">
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">Id</th>
-								<th scope="col"><i class="icon_profile"></i>Name</th>
-								<th scope="col"><i class="icon_pin_alt"></i>Address</th>
-								<th scope="col"><i class="icon_mail_alt"></i>Email</th>
-								<th scope="col"><i class="icon_mobile"></i>Phone</th>
-								<th scope="col"><i class="icon_calendar"></i>Salary</th>
-								<th scope="col"><i class="icon_cogs"></i>Action</th>
+					<button type="submit" class="btn btn-primary "
+						style="margin-top: 25px;">Submit</button>
+					<hr>
+					<hr>
+				</form>
 
 
 
-								<!-- 	<th><i class="icon_profile"></i> Full Name</th>
-					<th><i class="icon_calendar"></i>Hire Date</th>
-					<th><i class="icon_mail_alt"></i> Email</th>
-					<th><i class="icon_pin_alt"></i> City</th>
-					<th><i class="icon_mobile"></i> Phone</th>
-					<th><i class="icon_cogs"></i> Action</th> -->
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="e,iterationStatus: ${emp}">
-								<th th:text="${iterationStatus.count}"></th>
-								<th th:text="${e.id}"></th>
-								<td th:text="${e.name}"></td>
-								<td th:text="${e.address}"></td>
-								<td th:text="${e.email}"></td>
-								<td th:text="${e.phone}"></td>
-								<td th:text="${e.salary}"></td>
 
-								<td><a class="btn btn-sm btn-primary"
-									th:href="@{/edit/{id}(id=${e.id})}">Edit</a> <a
-									class="btn btn-sm btn-danger" id="deleteButton"
-									th:href="@{/delete/{id}(id=${e.id})}">Delete</a></td>
-							</tr>
 
-						</tbody>
-					</table>
-				</div>
+
+
+
+
 
 
 
@@ -422,95 +391,90 @@
 
 
 
-		<!-- <div class="text-center" style="position:absolute; bottom:0;right:33%; ">
+
+		<div class="text-right">
 			<div class="credits">
-				
+				<!--
             All the links in the footer should remain intact.
             You can delete the links only if you purchased the pro version.
             Licensing information: https://bootstrapmade.com/license/
             Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
-         
+          -->
 				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
 			</div>
-		</div> -->
-		<footer class="bg-light text-center text-white">
-			<!-- Grid container -->
-			<div class="  p-2 pb-0" style="background-color: pink;">
-				<!-- Section: Social media -->
-
-
-				<!-- LinkedIn -->
-				<a class="btn   btn-floating m-1" style="background-color: white;"
-					href="#!"><i class="fa fa-linkedin mr-1"></i></a>
-				<!-- Twitter -->
-				<a class="btn   btn-floating m-1" style="background-color: white;"
-					href="#!"><i class="fa fa-twitter mr-1"></i></a>
-				<!-- Reddit -->
-				<a class="btn btn-primary btn-floating m-1"
-					style="background-color: white;" href="#!"><i
-					class="fa fa-reddit mr-1"></i></a>
-				<!-- Google+ -->
-				<a class="btn btn-primary btn-floating m-1"
-					style="background-color: white;" href="#!"><i
-					class="fa fa-google-plus mr-1"></i></a>
-				<!-- Github -->
-				<a class="btn btn-primary btn-floating m-1"
-					style="background-color: white;" href="#!"><i
-					class="fa fa-github mr-1"></i></a>
-				<!-- Medium -->
-				<a class="btn btn-primary btn-floating m-1"
-					style="background-color: white;" href="#!"><i
-					class="fa fa-medium mr-1"></i></a>
-				<!-- Facebook -->
-				<a class="btn btn-primary btn-floating m-1"
-					style="background-color: white;" href="#!"><i
-					class="fa fa-facebook mr-1"></i></a>
-				<!-- YouTube -->
-				<a class="btn btn-primary btn-floating m-1" style="" href="#!"><i
-					class="fa fa-youtube mr-1"></i></a>
-
-				<!-- Section: Social media -->
-			</div>
-			<!-- Grid container -->
-
-			<!-- Copyright -->
-			<div class="text-center p-3"
-				style="background-color: rgba(0, 0, 0, 0.2);">
-				© 2020 Copyright: <a class="text-white"
-					href="https://mdbootstrap.com/">MDBootstrap.com</a>
-			</div>
-			<!-- Copyright -->
-		</footer>
+		</div>
 	</section>
 	<!--main content end-->
 	</section>
-	<!-- container section End -->
+	<!-- container section start -->
 
 
 
 
- 
+	<script type="text/javascript">
+		$('#fileImage').change(
+				function() {
+					var file = this.files[0];
+					if (file.type != "image/png" && file.type != "image/jpeg"
+							&& file.type != "image/jpg"
+							&& file.type != "image/gif") {
+						alert("Please choose png,jpg, jpeg or gif files");
+						return false;
+					}
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('#previewImage').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(file);
+				});
+	</script>
+
+
+
+	<!-- javascripts -->
+	<!-- <script type = "text/javascript">
+$(document).ready(function(){
+  $("#fileImage").change(function(){
+    showImageThumbnail(this)
+  });
+  
+  
+  function showImageThumbnail(fileInput){
+	  file = fileInput.files[0];
+	  var  reader = new FIleReader();
+	  
+	  reader.onload = function (e){
+		  $('#thumbnail').attr('src', e.targer.result);  
+	  };
+	  reader.readAsDataURL(file);
+	  
+  }
+  
+  
+});
+</script> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 	<!-- javascripts -->
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-		crossorigin="anonymous"></script>  -->
-
-
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery-ui-1.10.4.min.js"></script>
 	<script src="js/jquery-1.8.3.min.js"></script>
@@ -540,24 +504,9 @@
 	<!--custome script for all page-->
 	<script src="js/scripts.js"></script>
 	<!-- custom script for this page-->
-	<script src="js/sparkline-chart.js"></script>
-	<script src="js/easy-pie-chart.js"></script>
-	<script src="js/jquery-jvectormap-1.2.2.min.js"></script>
-	<script src="js/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="js/xcharts.min.js"></script>
-	<script src="js/jquery.autosize.min.js"></script>
-	<script src="js/jquery.placeholder.min.js"></script>
-	<script src="js/gdp-data.js"></script>
-	<script src="js/morris.min.js"></script>
-	<script src="js/sparklines.js"></script>
-	<script src="js/charts.js"></script>
-	<script src="js/jquery.slimscroll.min.js"></script>
 
 
 
-
-
- 
 </body>
 
 </html>

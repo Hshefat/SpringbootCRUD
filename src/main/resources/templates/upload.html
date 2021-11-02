@@ -11,20 +11,6 @@
 	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 <link rel="shortcut icon" href="img/favicon.png">
 
-
-
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-	crossorigin="anonymous">
-<!-- Font Awesome JS -->
-<script src="https://kit.fontawesome.com/0000000000.js"
-	crossorigin="anonymous"></script>
-
-
-
-
 <title>Creative - Bootstrap Admin Template</title>
 
 <!-- Bootstrap CSS -->
@@ -273,20 +259,18 @@
 			<div id="sidebar" class="nav-collapse ">
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu">
-					<li class="active"><a class="" th:href="@{/}"> <i
+					<li class="active"><a class="" href="index.html"> <i
 							class="icon_house_alt"></i> <span>Dashboard</span>
 					</a></li>
-					<li class="sub-menu">
-					<a href="javascript:;" class=""> <i
+					<li class="sub-menu"><a href="javascript:;" class=""> <i
 							class="icon_document_alt"></i> <span>Forms</span> <span
 							class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">
-							<li><a class="" th:href="@{/addemp}">Add Employee</a></li>
-							<li><a class="" th:href="@{/image}">Image&File</a></li>
-							<li><a class="" th:href="@{/upload}">Upload</a></li>
-						</ul>
-					</li>
+							<li><a class="" href="form_component.html">Form Elements</a></li>
+							<li><a class="" href="form_validation.html">Form
+									Validation</a></li>
+						</ul></li>
 					<li class="sub-menu"><a href="javascript:;" class=""> <i
 							class="icon_desktop"></i> <span>UI Fitures</span> <span
 							class="menu-arrow arrow_carrot-right"></span>
@@ -355,162 +339,45 @@
 				Page content goes here
 				<!-- page end-->
 
+				<form th:action="@{/users/save}" th:object="${user}" method="post"
+					enctype="multipart/form-data">
+					...
+					<div>
 
+						<label>Photos: </label> <input type="file" name="image"
+							accept="image/png, image/jpeg" />
 
-
-
-
-				<div class="container ">
-					<div th:if="${session.msg}">
-						<div class="alert alert-success" role="alert"
-							th:text="${session.msg}"></div>
-						<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
 					</div>
-				</div>
-
-
-
-				<div class="container p-5">
-				<a class="btn btn-primary" th:href="@{/addemp}">Add Employee</a>
-					<table class="table table-striped">
-						<thead class="bg-light text-red">
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">Id</th>
-								<th scope="col"><i class="icon_profile"></i>Name</th>
-								<th scope="col"><i class="icon_pin_alt"></i>Address</th>
-								<th scope="col"><i class="icon_mail_alt"></i>Email</th>
-								<th scope="col"><i class="icon_mobile"></i>Phone</th>
-								<th scope="col"><i class="icon_calendar"></i>Salary</th>
-								<th scope="col"><i class="icon_cogs"></i>Action</th>
-
-
-
-								<!-- 	<th><i class="icon_profile"></i> Full Name</th>
-					<th><i class="icon_calendar"></i>Hire Date</th>
-					<th><i class="icon_mail_alt"></i> Email</th>
-					<th><i class="icon_pin_alt"></i> City</th>
-					<th><i class="icon_mobile"></i> Phone</th>
-					<th><i class="icon_cogs"></i> Action</th> -->
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="e,iterationStatus: ${emp}">
-								<th th:text="${iterationStatus.count}"></th>
-								<th th:text="${e.id}"></th>
-								<td th:text="${e.name}"></td>
-								<td th:text="${e.address}"></td>
-								<td th:text="${e.email}"></td>
-								<td th:text="${e.phone}"></td>
-								<td th:text="${e.salary}"></td>
-
-								<td><a class="btn btn-sm btn-primary"
-									th:href="@{/edit/{id}(id=${e.id})}">Edit</a> <a
-									class="btn btn-sm btn-danger" id="deleteButton"
-									th:href="@{/delete/{id}(id=${e.id})}">Delete</a></td>
-							</tr>
-
-						</tbody>
-					</table>
-				</div>
-
-
-
+				<button type="submit" class="btn btn-primary "
+						style="margin-top: 25px;">Submit</button>
+				</form>
+				
+	 
+ 
 			</section>
 		</section>
 		<!--main content end-->
 
 
 
-		<!-- <div class="text-center" style="position:absolute; bottom:0;right:33%; ">
+
+		<div class="text-right">
 			<div class="credits">
-				
+				<!--
             All the links in the footer should remain intact.
             You can delete the links only if you purchased the pro version.
             Licensing information: https://bootstrapmade.com/license/
             Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
-         
+          -->
 				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
 			</div>
-		</div> -->
-		<footer class="bg-light text-center text-white">
-			<!-- Grid container -->
-			<div class="  p-2 pb-0" style="background-color: pink;">
-				<!-- Section: Social media -->
-
-
-				<!-- LinkedIn -->
-				<a class="btn   btn-floating m-1" style="background-color: white;"
-					href="#!"><i class="fa fa-linkedin mr-1"></i></a>
-				<!-- Twitter -->
-				<a class="btn   btn-floating m-1" style="background-color: white;"
-					href="#!"><i class="fa fa-twitter mr-1"></i></a>
-				<!-- Reddit -->
-				<a class="btn btn-primary btn-floating m-1"
-					style="background-color: white;" href="#!"><i
-					class="fa fa-reddit mr-1"></i></a>
-				<!-- Google+ -->
-				<a class="btn btn-primary btn-floating m-1"
-					style="background-color: white;" href="#!"><i
-					class="fa fa-google-plus mr-1"></i></a>
-				<!-- Github -->
-				<a class="btn btn-primary btn-floating m-1"
-					style="background-color: white;" href="#!"><i
-					class="fa fa-github mr-1"></i></a>
-				<!-- Medium -->
-				<a class="btn btn-primary btn-floating m-1"
-					style="background-color: white;" href="#!"><i
-					class="fa fa-medium mr-1"></i></a>
-				<!-- Facebook -->
-				<a class="btn btn-primary btn-floating m-1"
-					style="background-color: white;" href="#!"><i
-					class="fa fa-facebook mr-1"></i></a>
-				<!-- YouTube -->
-				<a class="btn btn-primary btn-floating m-1" style="" href="#!"><i
-					class="fa fa-youtube mr-1"></i></a>
-
-				<!-- Section: Social media -->
-			</div>
-			<!-- Grid container -->
-
-			<!-- Copyright -->
-			<div class="text-center p-3"
-				style="background-color: rgba(0, 0, 0, 0.2);">
-				© 2020 Copyright: <a class="text-white"
-					href="https://mdbootstrap.com/">MDBootstrap.com</a>
-			</div>
-			<!-- Copyright -->
-		</footer>
+		</div>
 	</section>
 	<!--main content end-->
 	</section>
-	<!-- container section End -->
-
-
-
-
- 
-
-
-
+	<!-- container section start -->
 
 	<!-- javascripts -->
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-		crossorigin="anonymous"></script>  -->
-
-
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery-ui-1.10.4.min.js"></script>
 	<script src="js/jquery-1.8.3.min.js"></script>
@@ -552,12 +419,52 @@
 	<script src="js/sparklines.js"></script>
 	<script src="js/charts.js"></script>
 	<script src="js/jquery.slimscroll.min.js"></script>
+	<script>
+		//knob
+		$(function() {
+			$(".knob").knob({
+				'draw' : function() {
+					$(this.i).val(this.cv + '%')
+				}
+			})
+		});
 
+		//carousel
+		$(document).ready(function() {
+			$("#owl-slider").owlCarousel({
+				navigation : true,
+				slideSpeed : 300,
+				paginationSpeed : 400,
+				singleItem : true
 
+			});
+		});
 
+		//custom select box
 
+		$(function() {
+			$('select.styled').customSelect();
+		});
 
- 
+		/* ---------- Map ---------- */
+		$(function() {
+			$('#map').vectorMap({
+				map : 'world_mill_en',
+				series : {
+					regions : [ {
+						values : gdpData,
+						scale : [ '#000', '#000' ],
+						normalizeFunction : 'polynomial'
+					} ]
+				},
+				backgroundColor : '#eef3f7',
+				onLabelShow : function(e, el, code) {
+					el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
+				}
+			});
+		});
+	</script>
+
 </body>
 
 </html>
